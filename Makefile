@@ -1,3 +1,4 @@
+CC = gcc
 CFLAGS = -std=c99 -g -Wall -Wshadow -Wvla -Werror -Wunreachable-code
 OBJS = main.o linked_list.o tile_game.o queue.o
 HEADERS = linked_list.h tile_game.h
@@ -11,6 +12,20 @@ $(APP): $(OBJS)
 clean:
 	/bin/rm -rf *.o
 	/bin/rm -rf $(APP)
+
+testall: test1 test2 test3
+
+test1: $(APP)
+	./$(APP) testcases/1.txt
+
+test2: $(APP)
+	./$(APP) testcases/2.txt
+
+test3: $(APP)
+	./$(APP) testcases/3.txt
+
+memcheck: $(APP)
+	valgrind --leak-check=yes $(APP) 
 
 %.o: %.c $(HEADERS)
 	$(CC) -c $< -o $@ $(CFLAGS)

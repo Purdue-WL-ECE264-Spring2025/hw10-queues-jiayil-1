@@ -31,6 +31,7 @@ int main(int argc, char **argv) {
       }
     }
   }
+
   fclose(fp);
 
   int output = number_of_moves(start);
